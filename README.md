@@ -167,6 +167,7 @@ setRouteSSRConfig('/dashboard', { ssr: 'data-only' }); // Data prefetch only
 1. Creates router with browser history
 2. Hydrates server-rendered HTML with `hydrateRoot`
 3. Server functions become transparent `fetch()` calls
+4. Event handlers are attached during hydration
 
 ## TanStack Start vs This Setup
 
@@ -178,6 +179,13 @@ setRouteSSRConfig('/dashboard', { ssr: 'data-only' }); // Data prefetch only
 - Selective SSR control
 - Full control over SSR behavior
 - Simpler mental model
+
+## Technical Notes
+
+### SSR Hydration
+- Server functions use deterministic naming for consistent server/client matching
+- Router is configured to avoid Suspense boundary mismatches during hydration
+- QueryClient is shared across requests (consider per-request instances for production)
 
 ## Limitations
 

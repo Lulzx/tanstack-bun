@@ -422,15 +422,17 @@ const routeTree = rootRoute.addChildren([
 ]);
 
 // Factory to create router instances
-export function createAppRouter(url?: string) {
-  const history = url
-    ? createMemoryHistory({ initialEntries: [url] })
+export function createAppRouter(options?: { url?: string; isServer?: boolean }) {
+  const history = options?.url
+    ? createMemoryHistory({ initialEntries: [options.url] })
     : undefined;
 
   return createRouter({
     routeTree,
     history,
     defaultPreload: "intent",
+    // Disable Suspense wrapper during SSR to avoid hydration mismatch
+    defaultPendingComponent: undefined,
   });
 }
 

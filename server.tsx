@@ -72,7 +72,7 @@ await buildClient();
 
 // SSR render function with streaming
 async function renderApp(url: string): Promise<ReadableStream> {
-  const router = createAppRouter(url);
+  const router = createAppRouter({ url, isServer: true });
 
   // Wait for data loaders
   await router.load();
@@ -149,7 +149,7 @@ const server = Bun.serve({
     if (isDataOnlySSR(pathname)) {
       // Data-only SSR - fetch data on server, render on client
       console.log(`[ssr] Data-only mode for ${pathname}`);
-      const router = createAppRouter(fullUrl);
+      const router = createAppRouter({ url: fullUrl, isServer: true });
       await router.load();
 
       // Extract any loader data from the router state

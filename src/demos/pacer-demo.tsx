@@ -64,10 +64,12 @@ export function PacerDemo() {
   const addToQueue = useCallback(() => {
     const item = `Task-${Date.now().toString(36)}`;
     setQueueItems((items) => [...items, item]);
-    queuer.addItem(item).then(() => {
+    queuer.addItem(item);
+    // Use a timeout to simulate processing completion
+    setTimeout(() => {
       setQueueProcessed((p) => [...p, item]);
       setQueueItems((items) => items.filter((i) => i !== item));
-    });
+    }, 600);
   }, []);
 
   return (

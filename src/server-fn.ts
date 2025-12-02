@@ -289,13 +289,17 @@ async function handleResponse(response: Response) {
   return response.json();
 }
 
+// Deterministic counter for server function names
+// This ensures the same function gets the same name on both server and client
+let serverFnCounter = 0;
+
 // Main createServerFn function (TanStack Start-like API)
 export function createServerFn(): ServerFnBuilder<void, void, "POST">;
 export function createServerFn(options: { method: "GET" }): ServerFnBuilder<void, void, "GET">;
 export function createServerFn(options: { method: "POST" }): ServerFnBuilder<void, void, "POST">;
 export function createServerFn(options?: { method?: "GET" | "POST" }): ServerFnBuilder<void, void, "GET" | "POST"> {
   const method = options?.method ?? "POST";
-  const name = `fn_${Math.random().toString(36).slice(2, 10)}`;
+  const name = `fn_${serverFnCounter++}`;
 
   return createServerFnBuilder({
     name,
