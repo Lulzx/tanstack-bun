@@ -5,7 +5,12 @@ import { createAppRouter } from "./routes";
 // Create router for client (uses browser history by default)
 const router = createAppRouter();
 
-// Hydrate the SSR'd HTML
+// Wait for router to hydrate with SSR state
+router.hydrate();
+
+// Hydrate the server-rendered HTML
 hydrateRoot(document, <RouterProvider router={router} />);
 
-console.log("🔥 Client hydrated!");
+if (import.meta.env?.DEV) {
+  console.log("[client] Hydrated successfully");
+}
