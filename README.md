@@ -1,6 +1,6 @@
 # TanStack Suite + Bun (No Vite, No Nitro)
 
-A full-featured TanStack setup with SSR using **only Bun's native APIs**. Includes 8 TanStack libraries with TanStack Start-like features.
+A minimal, novel setup for TanStack Router with SSR using only Bun's native APIs. Includes 8 TanStack libraries with TanStack Start-like features.
 
 ## What's Different?
 
